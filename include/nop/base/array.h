@@ -56,11 +56,11 @@ struct Encoding<std::array<T, Length>, EnableIfNotIntegral<T>>
   }
 
   static constexpr std::size_t Size(const Type& value) {
-    return BaseEncodingSize(Prefix(value)) + Encoding<SizeType>::Size(Length) +
-           std::accumulate(value.cbegin(), value.cend(), 0U,
-                           [](const std::size_t& sum, const T& element) {
-                             return sum + Encoding<T>::Size(element);
-                           });
+    std::size_t children = 0;
+    for (size_t i = 0; i < Length; i++) {
+      children += Encoding<T>::Size(value[i]);
+    }
+    return BaseEncodingSize(Prefix(value)) + Encoding<SizeType>::Size(Length) + children;
   }
 
   static constexpr bool Match(EncodingByte prefix) {

@@ -57,12 +57,12 @@ struct MemberPointer<T Class::*, Pointer> {
         static_cast<const void*>(&(instance.*Pointer)));
   }
 
-  static std::size_t Size(const Class& instance) {
+  static constexpr std::size_t Size(const Class& instance) {
     return Encoding<T>::Size(Resolve(instance));
   }
 
   template <typename Writer, typename MemberList>
-  static Status<void> Write(const Class& instance, Writer* writer,
+  static constexpr Status<void> Write(const Class& instance, Writer* writer,
                             MemberList /*member_list*/) {
     return Encoding<T>::Write(Resolve(instance), writer);
   }
