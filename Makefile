@@ -12,7 +12,7 @@ GTEST_LIB ?= $(GTEST_INSTALL)/lib
 GTEST_INCLUDE ?= $(GTEST_INSTALL)/include
 
 HOST_CFLAGS := -g -O2 -Wall -Werror -Wextra -Iinclude
-HOST_CXXFLAGS := -std=c++14
+HOST_CXXFLAGS := -std=c++17
 HOST_LDFLAGS :=
 
 ifeq ($(HOST_OS),Linux)
@@ -45,20 +45,21 @@ M_NAME := test
 M_CFLAGS := -I$(GTEST_INCLUDE) --coverage -O0 -g
 M_LDFLAGS := -L$(GTEST_LIB) -lgtest -lgmock
 M_OBJS := \
-	test/nop_tests.o \
+	test/constexpr_tests.o \
 	test/encoding_tests.o \
-	test/serializer_tests.o \
-	test/utility_tests.o \
-	test/variant_tests.o \
-	test/handle_tests.o \
-	test/thread_local_tests.o \
+	test/endian_tests.o \
 	test/enum_flags_tests.o \
-	test/sip_hash_tests.o \
-	test/interface_tests.o \
 	test/fungible_tests.o \
+	test/handle_tests.o \
+	test/interface_tests.o \
+	test/nop_tests.o \
 	test/optional_tests.o \
 	test/result_tests.o \
-	test/endian_tests.o \
+	test/serializer_tests.o \
+	test/sip_hash_tests.o \
+	test/thread_local_tests.o \
+	test/utility_tests.o \
+	test/variant_tests.o \
 
 include build/host-executable.mk
 
