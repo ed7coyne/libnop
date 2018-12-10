@@ -1788,19 +1788,19 @@ TEST(Deserializer, char) {
   reader.Set(Compose(EncodingByte::PositiveFixIntMin));
   status = deserializer.Read(&value);
   ASSERT_TRUE(status);
-  EXPECT_EQ(0U, value);
+  EXPECT_EQ(0, value);
 
   // Max FIXINT.
   reader.Set(Compose(EncodingByte::PositiveFixIntMax));
   status = deserializer.Read(&value);
   ASSERT_TRUE(status);
-  EXPECT_EQ(127U, value);
+  EXPECT_EQ(127, value);
 
   // Min U8.
   reader.Set(Compose(EncodingByte::U8, Integer<std::uint8_t>(0)));
   status = deserializer.Read(&value);
   ASSERT_TRUE(status);
-  EXPECT_EQ(0U, value);
+  EXPECT_EQ(0, value);
 
   // Max U8.
   reader.Set(Compose(EncodingByte::U8, Integer<std::uint8_t>(0xff)));
